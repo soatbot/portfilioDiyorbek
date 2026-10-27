@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Akbaraliyev</title>
+  <link rel="icon" href="./images/global/site-icon.png" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+</head>
+
+<body>
+  <!-- jm-view jm-curtain  -->
+  <div class="jm-curtain">
+    <div class="jm-curtain-panel jm-curtain-1"></div>
+    <div class="jm-curtain-panel jm-curtain-2"></div>
+    <div class="jm-curtain-panel jm-curtain-3"></div>
+    <div class="jm-curtain-panel jm-curtain-4"></div>
+    <div class="jm-curtain-panel jm-curtain-5"></div>
+  </div>
+
+  <div class="jm-view jm-view-about">
+    <!-- nav -->
+    <nav>
+      <div class="jm-mark">
+        <div class="jm-mark-inner">
+          <p class="jm-mono"><a href="index.html">Akbaraliyev ✦ Dev</a></p>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.8rem;">
+        <!-- Multi-language Picker (UZ / EN / RU) -->
+        <div class="jm-lang-picker">
+          <button class="lang-btn active" data-lang="uz">UZ</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="ru">RU</button>
+        </div>
+
+        <div class="jm-menu-btn">
+          <div class="jm-menu-btn-inner">
+            <p class="jm-mono jm-menu-label-open" data-i18n="menuOpen">Menu</p>
+            <p class="jm-mono jm-menu-label-close" data-i18n="menuClose">Close</p>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="jm-drawer">
+      <div class="jm-drawer-links">
+        <div class="jm-drawer-link">
+          <p><a href="index.html" data-i18n="home">Home</a></p>
+        </div>
+        <div class="jm-drawer-link">
+          <p><a href="work.html" data-i18n="work">Selected Work</a></p>
+        </div>
+        <div class="jm-drawer-link jm-current">
+          <p><a href="about.html" data-i18n="about">About Akbaraliyev</a></p>
+        </div>
+        <div class="jm-drawer-link">
+          <p><a href="contact.html" data-i18n="contact">Say Hello</a></p>
+        </div>
+      </div>
+      <div class="jm-drawer-foot">
+        <div class="jm-drawer-foot-block">
+          <div class="jm-drawer-foot-label">
+            <p class="jm-mono" data-i18n="elsewhere">Elsewhere</p>
+          </div>
+          <div class="jm-drawer-foot-text">
+            <p class="jm-mono"><a href="https://t.me/akbaraliyev_dev" target="_blank">Telegram</a></p>
+            <p class="jm-mono"><a href="https://github.com/akbaraliyev" target="_blank">GitHub</a></p>
+          </div>
+        </div>
+        <div class="jm-drawer-foot-block">
+          <div class="jm-drawer-foot-text">
+            <p class="jm-mono">Akbaraliyev — Est. 2025</p>
+          </div>
+        </div>
+        <div class="jm-drawer-foot-block">
+          <div class="jm-drawer-foot-label">
+            <p class="jm-mono" data-i18n="getInTouch">Get in Touch</p>
+          </div>
+          <div class="jm-drawer-foot-text">
+            <p class="jm-mono">
+              <a href="mailto:diyorbekakbaraliyev6@gmail.com" target="_blank">diyorbekakbaraliyev6@gmail.com</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- about - about jm-stage -->
+    <section class="jm-bio">
+      <div class="jm-bio-title">
+        <h1 data-i18n="aboutTitle1">This is</h1>
+        <h1 data-i18n="aboutTitle2">Akbaraliyev</h1>
+      </div>
+      <div class="jm-bio-lead">
+        <p class="jm-lead" data-i18n="aboutLead">
+          I’m Akbaraliyev — an independent creative full-stack developer and designer
+          working on brand identities, web architectures, and
+          micro-interactions that make them feel alive.
+        </p>
+        <p class="jm-mono" data-i18n="aboutSince">Independent / since 2019</p>
+      </div>
+      <div class="jm-bio-portrait">
+        <img src="./images/services-header/portrait.jpeg" alt="Akbaraliyev portrait" />
+      </div>
+    </section>
+
+    <!-- about - about copy -->
+    <section class="jm-manifesto">
+      <div class="jm-manifesto-body">
+        <h3 data-i18n="manifesto1">
+          I engineer things that connect — technically and emotionally. From
+          brand systems to considered websites, my work lives where typography, motion, and detail meet.
+        </h3>
+        <h3 data-i18n="manifesto2">
+          Every project starts as a question — what should this feel like, and why. I like restraint over noise,
+          systems that scale, and interfaces that move with intent.
+        </h3>
+        <h3 data-i18n="manifesto3">
+          Akbaraliyev is an agile engineer who cares a lot. I build identities, interactive sites, and digital products
+          for people who value quality.
+        </h3>
+      </div>
+      <div class="jm-float" id="jm-float-1">
+        <p>Bold</p>
+      </div>
+      <div class="jm-float" id="jm-float-2">
+        <p>Considered</p>
+      </div>
+      <div class="jm-float" id="jm-float-3">
+        <p>Precise</p>
+      </div>
+      <div class="jm-float" id="jm-float-4">
+        <p>Scalable</p>
+      </div>
+      <div class="jm-float" id="jm-float-5">
+        <p>Performant</p>
+      </div>
+    </section>
+
+    <!-- about - jm-skills -->
+    <section class="jm-skills">
+      <div class="jm-skills-list">
+        <p class="jm-mono">01......................Full-Stack Development</p>
+        <p class="jm-mono">02........................Frontend Engineering</p>
+        <p class="jm-mono">03..........................Backend & APIs</p>
+        <p class="jm-mono">04...........................UI/UX Design</p>
+        <p class="jm-mono">05............................Database Systems</p>
+        <p class="jm-mono">06...........................Micro-Animations</p>
+        <p class="jm-mono">07..............................Automation</p>
+      </div>
+    </section>
+
+    <!-- about jm-stats -->
+    <section class="jm-stats">
+      <div class="jm-stats-row">
+        <div class="jm-stats-col jm-stats-head">
+          <h1 data-i18n="numbersHead">The numbers, briefly</h1>
+          <p data-i18n="numbersSub">A snapshot of the work so far</p>
+        </div>
+        <div class="jm-stats-col jm-stats-a">
+          <h1>35+</h1>
+          <p data-i18n="stat1">Projects shipped for founders and clients</p>
+        </div>
+      </div>
+      <div class="jm-stats-row">
+        <div class="jm-stats-col jm-stats-b">
+          <h1>100%</h1>
+          <p data-i18n="stat2">Independent and remote — by choice, with high quality</p>
+        </div>
+        <div class="jm-stats-col jm-stats-c">
+          <h1>25+</h1>
+          <p data-i18n="stat3">Long-term partners and returning clients</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- about - jm-reach cta -->
+    <section class="jm-cta">
+      <div class="jm-cta-btn">
+        <a href="contact.html"></a>
+        <div class="jm-cta-sub">
+          <p data-i18n="ctaSub">Have a project in mind? Let’s make it.</p>
+        </div>
+        <div class="jm-cta-lead">
+          <h1 data-i18n="ctaLead">Start a Project ↗</h1>
+        </div>
+      </div>
+    </section>
+
+    <!-- about - footer -->
+    <footer>
+      <div class="jm-foot-box">
+        <div class="jm-foot-glyphs jm-foot-glyphs-top">
+          <img src="./images/global/s6.png" alt="" />
+          <img src="./images/global/s6.png" alt="" />
+        </div>
+        <div class="jm-foot-glyphs jm-foot-glyphs-bottom">
+          <img src="./images/global/s6.png" alt="" />
+          <img src="./images/global/s6.png" alt="" />
+        </div>
+        <div class="jm-foot-title">
+          <h1>Akbaraliyev</h1>
+        </div>
+        <div class="jm-foot-cols">
+          <div class="jm-foot-col">
+            <p data-i18n="navigate">Navigate</p>
+            <p><a href="work.html" data-i18n="work">Work</a></p>
+            <p><a href="about.html" data-i18n="about">About</a></p>
+            <p><a href="contact.html" data-i18n="contact">Contact</a></p>
+          </div>
+          <div class="jm-foot-col">
+            <p data-i18n="admin">Admin</p>
+            <p><a href="admin/">Dashboard ↗</a></p>
+            <p><a href="admin/">Inbox</a></p>
+            <p><a href="admin/">Add Project</a></p>
+          </div>
+          <div class="jm-foot-col">
+            <p data-i18n="follow">Follow</p>
+            <p>
+              <a href="https://t.me/akbaraliyev_dev" target="_blank">Telegram</a>
+            </p>
+            <p>
+              <a href="https://github.com/akbaraliyev" target="_blank">GitHub</a>
+            </p>
+          </div>
+          <div class="jm-foot-col">
+            <p data-i18n="studio">Studio</p>
+            <p>Sirdaryo, UZ</p>
+            <p data-i18n="openForWork">Open for Work</p>
+          </div>
+        </div>
+        <div class="jm-foot-legal">
+          <p class="jm-mono" data-i18n="legalCopy">© 2025 Akbaraliyev. All rights reserved.</p>
+          <p class="jm-mono">//</p>
+          <p class="jm-mono">
+            Crafted by
+            <a href="https://github.com/akbaraliyev" target="_blank">Akbaraliyev</a>
+          </p>
+        </div>
+        <div class="jm-burst"></div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Data Store, I18n & Script bundle -->
+  <script src="./js/data-store.js"></script>
+  <script src="./js/i18n.js"></script>
+  <script src="./js/bundle.js"></script>
+</body>
+
+</html>

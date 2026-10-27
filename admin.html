@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — Akbaraliyev Portfolio</title>
+  <link rel="icon" href="./images/global/site-icon.png" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <style>
+    body {
+      background-color: var(--bg);
+      color: var(--fg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .admin-wrapper {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 2rem;
+      width: 100%;
+    }
+
+    .admin-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 0;
+      border-bottom: 2px solid var(--fg);
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .admin-tabs {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .admin-tab-btn {
+      padding: 0.75rem 1.4rem;
+      border: 2px solid var(--fg);
+      background: var(--bg2);
+      border-radius: 0.5rem;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .admin-tab-btn.active,
+    .admin-tab-btn:hover {
+      background: var(--fg);
+      color: var(--bg);
+    }
+
+    .badge-count {
+      background: var(--accent1);
+      color: var(--fg);
+      padding: 0.15rem 0.45rem;
+      border-radius: 1rem;
+      font-size: 0.75rem;
+    }
+
+    .tab-pane {
+      display: none;
+    }
+
+    .tab-pane.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .admin-card {
+      background: var(--bg2);
+      border: 2px solid var(--fg);
+      border-radius: 1.2rem;
+      padding: 2rem;
+      box-shadow: 8px 8px 0 var(--fg);
+      margin-bottom: 2rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .form-control {
+      padding: 0.85rem 1rem;
+      border: 2px solid var(--fg);
+      border-radius: 0.5rem;
+      background: var(--bg);
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      color: var(--fg);
+      outline: none;
+    }
+
+    .form-control:focus {
+      border-color: var(--accent1);
+      box-shadow: 0 0 0 3px rgba(237, 106, 90, 0.25);
+    }
+
+    textarea.form-control {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .btn-action {
+      padding: 0.85rem 1.6rem;
+      background: var(--fg);
+      color: var(--bg);
+      border: 2px solid var(--fg);
+      border-radius: 0.5rem;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-action:hover {
+      background: var(--accent1);
+      color: var(--fg);
+      transform: translateY(-2px);
+      box-shadow: 4px 4px 0 var(--fg);
+    }
+
+    .btn-danger {
+      background: #dc2626;
+      border-color: #dc2626;
+      color: #fff;
+    }
+
+    .btn-danger:hover {
+      background: #b91c1c;
+      color: #fff;
+      box-shadow: 4px 4px 0 var(--fg);
+    }
+
+    /* Image Preview Box */
+    .img-preview-container {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--bg2);
+      border: 2px dashed var(--fg);
+      border-radius: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-bottom: 1.2rem;
+      position: relative;
+    }
+
+    .img-preview-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    /* Projects Grid */
+    .projects-admin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .project-admin-card {
+      background: var(--bg);
+      border: 2px solid var(--fg);
+      border-radius: 1rem;
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      box-shadow: 4px 4px 0 var(--fg);
+    }
+
+    .project-admin-thumb {
+      aspect-ratio: 16/9;
+      border-radius: 0.6rem;
+      overflow: hidden;
+      border: 1px solid var(--fg);
+      background: var(--bg2);
+    }
+
+    .project-admin-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    /* Messages / Inbox */
+    .message-item {
+      background: var(--bg);
+      border: 2px solid var(--fg);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 1.2rem;
+      box-shadow: 4px 4px 0 var(--fg);
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .message-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(20, 20, 20, 0.15);
+      padding-bottom: 0.6rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    /* Login Modal */
+    .login-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: var(--bg);
+      z-index: 999999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .login-box {
+      max-width: 420px;
+      width: 100%;
+      background: var(--bg2);
+      border: 3px solid var(--fg);
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      box-shadow: 12px 12px 0 var(--fg);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- LOGIN LOCK SCREEN -->
+  <div class="login-overlay" id="login-overlay">
+    <div class="login-box">
+      <div class="jm-stage-foot-glyph jm-mono" style="font-size: 2rem;">✦ ✦ ✦</div>
+      <div>
+        <p class="jm-mono" style="color: var(--accent1);">SECURITY ACCESS</p>
+        <h2>Admin Panel</h2>
+        <p style="font-size: 0.95rem; margin-top: 0.5rem; opacity: 0.8;">Boshqaruv paneliga kirish uchun parolni
+          kiriting </p>
+      </div>
+      <form id="admin-login-form" style="display: flex; flex-direction: column; gap: 1rem;">
+        <input type="password" id="admin-password" placeholder="Parolni kiriting..." required class="form-control"
+          style="text-align: center; font-size: 1.2rem;" />
+        <button type="submit" class="btn-action"
+          style="justify-content: center; width: 100%; font-size: 1.05rem;">Kirish ↗</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MAIN ADMIN CONTAINER -->
+  <div class="admin-wrapper" id="admin-main" style="display: none;">
+    <!-- Top Nav -->
+    <header class="admin-nav">
+      <div>
+        <p class="jm-mono" style="color: var(--accent1);">PORTFOLIO CONTROL CENTER</p>
+        <h1 style="font-size: 2.8rem;">Admin Panel</h1>
+      </div>
+      <div style="display: flex; gap: 0.8rem; align-items: center;">
+        <a href="index.html" target="_blank" class="btn-action">Saytni Ko'rish ↗</a>
+        <button onclick="logoutAdmin()" class="btn-action btn-danger">Chiqish ✕</button>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="admin-tabs">
+      <button class="admin-tab-btn active" onclick="switchTab('inbox')">
+        <span>📬 Kelgan Xabarlar</span>
+        <span class="badge-count" id="badge-msg-count">0</span>
+      </button>
+      <button class="admin-tab-btn" onclick="switchTab('projects')">
+        <span>🎨 Loyihalar Boshqaruvi</span>
+        <span class="badge-count" id="badge-proj-count">0</span>
+      </button>
+      <button class="admin-tab-btn" onclick="switchTab('profile')">
+        <span>👤 Profil Sozlamalari</span>
+      </button>
+    </div>
+
+    <!-- TAB 1: INBOX / MESSAGES -->
+    <div class="tab-pane active" id="tab-inbox">
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <h2>Mijozlardan Kelgan Xabarlar</h2>
+          <p class="jm-mono" style="opacity: 0.7;">Saytning bog'lanish bo'limidan yozilgan barcha xabarlar</p>
+        </div>
+        <button onclick="clearAllMessages()" class="btn-action btn-danger" style="font-size: 0.85rem;">Barcha Xabarlarni
+          O'chirish 🗑</button>
+      </div>
+
+      <div id="messages-list-container">
+        <!-- Messages rendered dynamically -->
+      </div>
+    </div>
+
+    <!-- TAB 2: PROJECTS MANAGEMENT -->
+    <div class="tab-pane" id="tab-projects">
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <h2>Loyihalar Ro'yxati</h2>
+          <p class="jm-mono" style="opacity: 0.7;">Yangi loyiha qo'shing yoki mavjudlarini tahrirlang</p>
+        </div>
+        <button onclick="openAddProjectModal()" class="btn-action"
+          style="background: var(--accent1); color: var(--fg);">+ Yangi Loyiha Qo'shish</button>
+      </div>
+
+      <div class="projects-admin-grid" id="admin-projects-grid">
+        <!-- Projects rendered dynamically -->
+      </div>
+    </div>
+
+    <!-- TAB 3: PROFILE SETTINGS -->
+    <div class="tab-pane" id="tab-profile">
+      <div class="admin-card">
+        <h2 style="margin-bottom: 1.5rem;">Shaxsiy Ma'lumotlarni Yangilash</h2>
+        <form id="profile-edit-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Familiya / Brend Nomi:</label>
+              <input type="text" id="prof-firstname" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label>Ism / Kasb:</label>
+              <input type="text" id="prof-lastname" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label>Asosiy Kasb / Tagline:</label>
+              <input type="text" id="prof-role" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label>Email Manzili:</label>
+              <input type="email" id="prof-email" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label>Telegram Havolasi:</label>
+              <input type="text" id="prof-telegram" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label>GitHub Havolasi:</label>
+              <input type="text" id="prof-github" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label>Status Badge:</label>
+              <input type="text" id="prof-status" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label>Manzil / Shahar:</label>
+              <input type="text" id="prof-location" class="form-control" required />
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <label>Qisqacha Bio (Bio Lead):</label>
+            <textarea id="prof-biolead" class="form-control" rows="2" required></textarea>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 2rem;">
+            <label>Batafsil Tavsif (Bio Detail):</label>
+            <textarea id="prof-biodetail" class="form-control" rows="3" required></textarea>
+          </div>
+
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <button type="submit" class="btn-action" style="font-size: 1rem; padding: 1rem 2rem;">O'zgarishlarni Saqlash
+              💾</button>
+            <button type="button" onclick="resetToDemoData()" class="btn-action"
+              style="background: var(--bg); color: var(--fg);">Demo Holatiga Qaytarish ↺</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD / EDIT PROJECT -->
+  <div class="jm-modal-backdrop" id="project-form-modal">
+    <div class="jm-modal-card">
+      <button class="jm-modal-close" onclick="closeProjectModal()">✕</button>
+      <p class="jm-mono" style="color: var(--accent1); margin-bottom: 0.4rem;" id="modal-project-subtitle">LOYIHA
+        BOSHQARUVI</p>
+      <h2 style="margin-bottom: 1.5rem;" id="modal-project-title">Yangi Loyiha Qo'shish</h2>
+
+      <!-- Live Image Preview Container -->
+      <div class="img-preview-container" id="modal-img-preview-box">
+        <span class="jm-mono" id="preview-placeholder" style="opacity: 0.6;">Rasm tanlang yoki URL kiriting</span>
+        <img id="modal-img-preview" alt="Preview" />
+      </div>
+
+      <form id="project-save-form">
+        <input type="hidden" id="edit-project-id" value="" />
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Kompyuterdan Rasm Yuklash:</label>
+            <input type="file" id="proj-file-input" accept="image/*" class="form-control" style="padding: 0.5rem;" />
+          </div>
+
+          <div class="form-group">
+            <label>Yoki Rasm URL Manzili:</label>
+            <input type="text" id="proj-image" class="form-control"
+              placeholder="https://... yoki ./images/work-items/work-item-1.jpg" required />
+          </div>
+
+          <div class="form-group">
+            <label>Loyiha Nomi:</label>
+            <input type="text" id="proj-title" class="form-control" placeholder="Masalan: Nova Atlas" required />
+          </div>
+
+          <div class="form-group">
+            <label>Toifasi (Category):</label>
+            <input type="text" id="proj-category" class="form-control" placeholder="Masalan: Full-Stack, Web Design"
+              required />
+          </div>
+
+          <div class="form-group">
+            <label>Yili:</label>
+            <input type="text" id="proj-year" class="form-control" value="2025" required />
+          </div>
+
+          <div class="form-group">
+            <label>Teglar (vergul bilan):</label>
+            <input type="text" id="proj-tags" class="form-control" placeholder="React, Node.js, GSAP" required />
+          </div>
+
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label>GitHub Havolasi:</label>
+            <input type="text" id="proj-link" class="form-control" placeholder="https://github.com/..." />
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label>Tavsifi (Description):</label>
+          <textarea id="proj-desc" class="form-control" rows="3" placeholder="Loyiha haqida qisqacha ma'lumot..."
+            required></textarea>
+        </div>
+
+        <button type="submit" class="btn-action"
+          style="width: 100%; justify-content: center; padding: 1rem; font-size: 1.05rem;">Loyihani Saqlash 💾</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="jm-toast" id="jm-toast"></div>
+
+  <!-- Data Store Engine -->
+  <script src="./js/data-store.js"></script>
+  <script>
+    // Security PIN Login
+    const AUTH_KEY = "akbaraliyev_admin_auth";
+    const DEFAULT_PASS = "admin123";
+
+    document.getElementById("admin-login-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const entered = document.getElementById("admin-password").value;
+      if (entered === DEFAULT_PASS) {
+        sessionStorage.setItem(AUTH_KEY, "true");
+        unlockAdmin();
+        showToast("✅ Muvaffaqiyatli kirdingiz!");
+      } else {
+        showToast("❌ Parol noto'g'ri! Qaytadan urinib ko'ring.");
+      }
+    });
+
+    function checkAuth() {
+      if (sessionStorage.getItem(AUTH_KEY) === "true") {
+        unlockAdmin();
+      } else {
+        document.getElementById("login-overlay").style.display = "flex";
+        document.getElementById("admin-main").style.display = "none";
+      }
+    }
+
+    function unlockAdmin() {
+      document.getElementById("login-overlay").style.display = "none";
+      document.getElementById("admin-main").style.display = "block";
+      initAdminDashboard();
+    }
+
+    function logoutAdmin() {
+      sessionStorage.removeItem(AUTH_KEY);
+      location.reload();
+    }
+
+    // Tabs Switcher
+    function switchTab(tabId) {
+      document.querySelectorAll(".admin-tab-btn").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".tab-pane").forEach(p => p.classList.remove("active"));
+
+      const targetPane = document.getElementById("tab-" + tabId);
+      if (targetPane) targetPane.classList.add("active");
+
+      if (event && event.currentTarget) {
+        event.currentTarget.classList.add("active");
+      }
+    }
+
+    // Initialize Dashboard Data
+    function initAdminDashboard() {
+      renderMessages();
+      renderAdminProjects();
+      loadProfileForm();
+      initImageInputHandlers();
+    }
+
+    // Image Input & File Upload Preview Handler
+    function initImageInputHandlers() {
+      const fileInput = document.getElementById("proj-file-input");
+      const urlInput = document.getElementById("proj-image");
+      const previewImg = document.getElementById("modal-img-preview");
+      const placeholder = document.getElementById("preview-placeholder");
+
+      // Handle File Upload from device
+      fileInput.addEventListener("change", () => {
+        const file = fileInput.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const dataUrl = e.target.result;
+            urlInput.value = dataUrl;
+            updatePreview(dataUrl);
+            showToast("📷 Rasm muvaffaqiyatli yuklandi!");
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // Handle Image URL input
+      urlInput.addEventListener("input", () => {
+        updatePreview(urlInput.value.trim());
+      });
+
+      function updatePreview(src) {
+        if (src) {
+          previewImg.src = src;
+          previewImg.style.display = "block";
+          placeholder.style.display = "none";
+          previewImg.onerror = () => {
+            previewImg.src = "./images/hero/img1.jpg";
+          };
+        } else {
+          previewImg.style.display = "none";
+          placeholder.style.display = "block";
+        }
+      }
+    }
+
+    function setPreviewImage(src) {
+      const previewImg = document.getElementById("modal-img-preview");
+      const placeholder = document.getElementById("preview-placeholder");
+      if (src) {
+        previewImg.src = src;
+        previewImg.style.display = "block";
+        placeholder.style.display = "none";
+      } else {
+        previewImg.style.display = "none";
+        placeholder.style.display = "block";
+      }
+    }
+
+    // 1. MESSAGES (INBOX)
+    function renderMessages() {
+      const messages = DataStore.getMessages();
+      const container = document.getElementById("messages-list-container");
+      document.getElementById("badge-msg-count").textContent = messages.length;
+
+      if (!messages.length) {
+        container.innerHTML = `
+          <div class="admin-card" style="text-align: center; padding: 4rem 2rem;">
+            <p class="jm-mono" style="font-size: 1.1rem; opacity: 0.6;">Hozircha yangi xabarlar yo'q.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = messages.map(m => `
+        <div class="message-item">
+          <div class="message-header">
+            <div>
+              <h3 style="font-size: 1.4rem;">${escapeHtml(m.name)}</h3>
+              <p class="jm-mono" style="color: var(--accent1);">${escapeHtml(m.contact)}</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <span class="jm-mono" style="opacity: 0.7; font-size: 0.8rem;">${m.date}</span>
+              <button onclick="deleteMessageItem('${m.id}')" class="btn-action btn-danger" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;">O'chirish ✕</button>
+            </div>
+          </div>
+          <p style="font-size: 1.05rem; line-height: 1.5; white-space: pre-wrap;">${escapeHtml(m.message)}</p>
+        </div>
+      `).join("");
+    }
+
+    function deleteMessageItem(id) {
+      DataStore.deleteMessage(String(id));
+      renderMessages();
+      showToast("🗑 Xabar o'chirildi.");
+    }
+
+    function clearAllMessages() {
+      DataStore.clearAllMessages();
+      renderMessages();
+      showToast("🗑 Barcha xabarlar tozalandi.");
+    }
+
+    // 2. PROJECTS
+    function renderAdminProjects() {
+      const projects = DataStore.getProjects();
+      const container = document.getElementById("admin-projects-grid");
+      document.getElementById("badge-proj-count").textContent = projects.length;
+
+      container.innerHTML = projects.map(p => `
+        <div class="project-admin-card" id="card-${p.id}">
+          <div class="project-admin-thumb">
+            <img src="${p.image}" alt="${p.title}" onerror="this.src='./images/hero/img1.jpg'" />
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <h3 style="font-size: 1.4rem;">${escapeHtml(p.title)}</h3>
+            <span class="jm-mono" style="opacity: 0.7;">/${p.year}</span>
+          </div>
+          <p class="jm-mono" style="color: var(--accent1); font-weight: 700;">${escapeHtml(p.category)}</p>
+          <p style="font-size: 0.9rem; opacity: 0.8; line-height: 1.4;">${escapeHtml(p.description)}</p>
+          <div class="project-admin-tags">
+            ${p.tags.map(t => `<span class="jm-tag" style="background: var(--bg2);">${escapeHtml(t)}</span>`).join("")}
+          </div>
+          <div style="display: flex; gap: 0.5rem; margin-top: auto; padding-top: 0.8rem; border-top: 1px solid rgba(20,20,20,0.1);">
+            <button onclick="openEditProjectModal('${p.id}')" class="btn-action" style="flex: 1; justify-content: center; font-size: 0.8rem; padding: 0.5rem;">Tahrirlash ✎</button>
+            <button onclick="deleteProjectItem('${p.id}')" class="btn-action btn-danger" style="padding: 0.5rem 0.8rem; font-size: 0.8rem;">O'chirish ✕</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function openAddProjectModal() {
+      document.getElementById("edit-project-id").value = "";
+      document.getElementById("modal-project-title").textContent = "Yangi Loyiha Qo'shish";
+      document.getElementById("project-save-form").reset();
+      document.getElementById("proj-year").value = new Date().getFullYear();
+      setPreviewImage("");
+      document.getElementById("project-form-modal").classList.add("is-open");
+    }
+
+    function openEditProjectModal(id) {
+      const p = DataStore.getProjects().find(proj => String(proj.id) === String(id));
+      if (!p) return;
+
+      document.getElementById("edit-project-id").value = p.id;
+      document.getElementById("modal-project-title").textContent = "Loyihani Tahrirlash: " + p.title;
+      document.getElementById("proj-title").value = p.title;
+      document.getElementById("proj-category").value = p.category;
+      document.getElementById("proj-year").value = p.year;
+      document.getElementById("proj-image").value = p.image;
+      document.getElementById("proj-tags").value = (p.tags || []).join(", ");
+      document.getElementById("proj-link").value = p.link || "";
+      document.getElementById("proj-desc").value = p.description || "";
+
+      setPreviewImage(p.image);
+      document.getElementById("project-form-modal").classList.add("is-open");
+    }
+
+    function closeProjectModal() {
+      document.getElementById("project-form-modal").classList.remove("is-open");
+    }
+
+    document.getElementById("project-save-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const editId = document.getElementById("edit-project-id").value;
+      const title = document.getElementById("proj-title").value.trim();
+      const category = document.getElementById("proj-category").value.trim();
+      const year = document.getElementById("proj-year").value.trim();
+      const image = document.getElementById("proj-image").value.trim() || "./images/hero/img1.jpg";
+      const tags = document.getElementById("proj-tags").value.split(",").map(t => t.trim()).filter(Boolean);
+      const link = document.getElementById("proj-link").value.trim();
+      const desc = document.getElementById("proj-desc").value.trim();
+
+      const projectData = {
+        title, category, year, image, tags,
+        link: link || "https://github.com/akbaraliyev",
+        demoLink: "project.html",
+        description: desc
+      };
+
+      if (editId) {
+        DataStore.updateProject(editId, projectData);
+        showToast("✅ Loyiha muvaffaqiyatli yangilandi!");
+      } else {
+        DataStore.addProject(projectData);
+        showToast("✨ Yangi loyiha qo'shildi!");
+      }
+
+      closeProjectModal();
+      renderAdminProjects();
+    });
+
+    function deleteProjectItem(id) {
+      DataStore.deleteProject(String(id));
+      renderAdminProjects();
+      showToast("🗑 Loyiha o'chirildi.");
+    }
+
+    // 3. PROFILE SETTINGS
+    function loadProfileForm() {
+      const p = DataStore.getProfile();
+      document.getElementById("prof-firstname").value = p.firstName || "Akbaraliyev";
+      document.getElementById("prof-lastname").value = p.lastName || "Diyorbek";
+      document.getElementById("prof-role").value = p.role || "";
+      document.getElementById("prof-email").value = p.email || "diyorbekakbaraliyev6@gmail.com";
+      document.getElementById("prof-telegram").value = p.telegram || "https://t.me/akbaraliyev_dev";
+      document.getElementById("prof-github").value = p.github || "https://github.com/akbaraliyev";
+      document.getElementById("prof-status").value = p.statusBadge || "Open for Work";
+      document.getElementById("prof-location").value = p.location || "Toshkent, O'zbekiston";
+      document.getElementById("prof-biolead").value = p.bioLead || "";
+      document.getElementById("prof-biodetail").value = p.bioDetail || "";
+    }
+
+    document.getElementById("profile-edit-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const updated = {
+        firstName: document.getElementById("prof-firstname").value.trim(),
+        lastName: document.getElementById("prof-lastname").value.trim(),
+        role: document.getElementById("prof-role").value.trim(),
+        email: document.getElementById("prof-email").value.trim(),
+        telegram: document.getElementById("prof-telegram").value.trim(),
+        github: document.getElementById("prof-github").value.trim(),
+        statusBadge: document.getElementById("prof-status").value.trim(),
+        location: document.getElementById("prof-location").value.trim(),
+        bioLead: document.getElementById("prof-biolead").value.trim(),
+        bioDetail: document.getElementById("prof-biodetail").value.trim()
+      };
+
+      DataStore.updateProfile(updated);
+      showToast("💾 Profil ma'lumotlari muvaffaqiyatli saqlandi!");
+    });
+
+    function resetToDemoData() {
+      DataStore.resetToDefaults();
+      initAdminDashboard();
+      showToast("↺ Ma'lumotlar tiklandi.");
+    }
+
+    // Helpers
+    function showToast(msg) {
+      const toast = document.getElementById("jm-toast");
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2600);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return "";
+      return String(str).replace(/[&<>"']/g, m => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[m]));
+    }
+
+    // Run auth check on load
+    checkAuth();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact | Akbaraliyev</title>
+    <link rel="icon" href="./images/global/site-icon.png" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <style>
+      .contact-form-box {
+        background: var(--bg2);
+        border: 2px solid var(--fg);
+        border-radius: 1.5rem;
+        padding: 2.5rem;
+        box-shadow: 8px 8px 0 var(--fg);
+        max-width: 550px;
+        width: 100%;
+        margin-top: 2rem;
+        text-align: left;
+      }
+      .contact-form-box input, .contact-form-box textarea {
+        width: 100%;
+        padding: 0.85rem 1rem;
+        border: 2px solid var(--fg);
+        border-radius: 0.5rem;
+        background: var(--bg);
+        font-family: inherit;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        color: var(--fg);
+        outline: none;
+      }
+      .contact-form-box input:focus, .contact-form-box textarea:focus {
+        border-color: var(--accent1);
+      }
+    </style>
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  </head>
+  <body>
+    <!-- jm-view jm-curtain  -->
+    <div class="jm-curtain">
+      <div class="jm-curtain-panel jm-curtain-1"></div>
+      <div class="jm-curtain-panel jm-curtain-2"></div>
+      <div class="jm-curtain-panel jm-curtain-3"></div>
+      <div class="jm-curtain-panel jm-curtain-4"></div>
+      <div class="jm-curtain-panel jm-curtain-5"></div>
+    </div>
+
+    <div class="jm-view jm-view-contact">
+      <!-- nav -->
+      <nav>
+        <div class="jm-mark">
+          <div class="jm-mark-inner">
+            <p class="jm-mono"><a href="index.html">Akbaraliyev ✦ Dev</a></p>
+          </div>
+        </div>
+        <div class="jm-menu-btn">
+          <div class="jm-menu-btn-inner">
+            <p class="jm-mono jm-menu-label-open">Menu</p>
+            <p class="jm-mono jm-menu-label-close">Close</p>
+          </div>
+        </div>
+      </nav>
+
+      <div class="jm-drawer">
+        <div class="jm-drawer-links">
+          <div class="jm-drawer-link">
+            <p><a href="index.html">Home</a></p>
+          </div>
+          <div class="jm-drawer-link">
+            <p><a href="work.html">Selected Work</a></p>
+          </div>
+          <div class="jm-drawer-link">
+            <p><a href="about.html">About Akbaraliyev</a></p>
+          </div>
+          <div class="jm-drawer-link jm-current">
+            <p><a href="contact.html">Say Hello</a></p>
+          </div>
+        </div>
+        <div class="jm-drawer-foot">
+          <div class="jm-drawer-foot-block">
+            <div class="jm-drawer-foot-label">
+              <p class="jm-mono">Elsewhere</p>
+            </div>
+            <div class="jm-drawer-foot-text">
+              <p class="jm-mono"><a href="https://t.me/akbaraliyev_dev" target="_blank">Telegram</a></p>
+              <p class="jm-mono"><a href="https://github.com/akbaraliyev" target="_blank">GitHub</a></p>
+            </div>
+          </div>
+          <div class="jm-drawer-foot-block">
+            <div class="jm-drawer-foot-text">
+              <p class="jm-mono">Akbaraliyev — Est. 2025</p>
+            </div>
+          </div>
+          <div class="jm-drawer-foot-block">
+            <div class="jm-drawer-foot-label">
+              <p class="jm-mono">Get in Touch</p>
+            </div>
+            <div class="jm-drawer-foot-text">
+              <p class="jm-mono">
+                <a href="mailto:diyorbekakbaraliyev6@gmail.com" target="_blank"
+                  >diyorbekakbaraliyev6@gmail.com</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- jm-reach - jm-stage -->
+      <section class="jm-reach">
+        <div class="jm-reach-card jm-reach-card-1">
+          <div class="jm-reach-card-lead">
+            <h1>Akbaraliyev is listening</h1>
+            <p>
+              Have a project taking shape, or just an idea you want to pressure
+              test? I’d love to hear it. Whether it’s a full brief or a quick
+              “could this work,” the inbox is open and I read everything that
+              comes through.
+            </p>
+          </div>
+          <p class="jm-mono jm-reach-card-tag">Email</p>
+          <p class="jm-mono"><a href="mailto:diyorbekakbaraliyev6@gmail.com" style="text-decoration: underline;">diyorbekakbaraliyev6@gmail.com</a></p>
+          <br />
+          <p class="jm-mono jm-reach-card-tag">Telegram Direct</p>
+          <p class="jm-mono"><a href="https://t.me/akbaraliyev_dev" target="_blank" style="text-decoration: underline;">@akbaraliyev_dev</a></p>
+        </div>
+
+        <!-- Real-time Contact Form connected to Admin Panel Inbox -->
+        <div class="contact-form-box">
+          <p class="jm-mono" style="color: var(--accent1); margin-bottom: 0.5rem;">QUICK MESSAGE</p>
+          <h2 style="font-size: 2.2rem; margin-bottom: 1rem;">Xabar Qoldiring</h2>
+          <form class="contact-submit-form">
+            <label class="jm-mono" style="font-size: 0.75rem; font-weight: 700; display: block; margin-bottom: 0.3rem;">ISM-FAMILIYA:</label>
+            <input type="text" name="name" placeholder="Ismingiz..." required />
+            
+            <label class="jm-mono" style="font-size: 0.75rem; font-weight: 700; display: block; margin-bottom: 0.3rem;">EMAIL YOKI TELEGRAM:</label>
+            <input type="text" name="contact" placeholder="@username yoki email@mail.com" required />
+            
+            <label class="jm-mono" style="font-size: 0.75rem; font-weight: 700; display: block; margin-bottom: 0.3rem;">XABARINGIZ / G'OYA:</label>
+            <textarea name="message" rows="4" placeholder="Loyiha haqida qisqacha yozing..." required></textarea>
+            
+            <button type="submit" class="jm-cta-btn" style="width: 100%; height: 60px; border-radius: 0.8rem; box-shadow: 4px 4px 0 var(--fg);">
+              <span class="jm-mono" style="font-size: 1rem; font-weight: 800; color: var(--fg); position: relative; z-index: 2;">Xabarni Yuborish ↗</span>
+            </button>
+          </form>
+        </div>
+
+        <div class="jm-reach-glyph">
+          <img src="./images/global/symbols.png" alt="" />
+        </div>
+      </section>
+    </div>
+
+    <!-- Data Store & Script bundle -->
+    <script src="./js/data-store.js"></script>
+    <script src="./js/bundle.js"></script>
+  </body>
+</html>
