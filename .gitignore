@@ -1,0 +1,30 @@
+# ==============================================================
+# AKBARALIYEV PORTFOLIO - GIT IGNORE
+# ==============================================================
+
+# 1. Maxfiy kalitlar va muhit o'zgaruvchilari (Secrets)
+.env
+.env.local
+.env.*.local
+
+# 2. Node.js paketlari va kutubxonalari
+node_modules/
+package-lock.json
+
+# 3. Loglar va vaqtinchalik fayllar
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 4. Operatsion tizim fayllari
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 5. Muharrir va IDE sozlamalari
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj

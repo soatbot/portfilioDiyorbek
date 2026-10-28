@@ -340,7 +340,7 @@ const DataStore = {
         const latency = Math.round(performance.now() - startTime);
         return { success: true, latency, message: `✅ Firebase bazasiga muvaffaqiyatli ulandi (${latency}ms)` };
       } else if (cfg.type === "supabase" || (!cfg.type && cfg.url.includes("supabase.co"))) {
-        const testUrl = `${cfg.url}/rest/v1/`;
+        const testUrl = `${cfg.url}/auth/v1/health`;
         const res = await fetch(testUrl, {
           headers: { "apikey": cfg.apiKey || "", "Authorization": `Bearer ${cfg.apiKey || ""}` }
         });
@@ -348,7 +348,7 @@ const DataStore = {
         if (res.ok || res.status === 200 || res.status === 204) {
           return { success: true, latency, message: `✅ Supabase bazasiga muvaffaqiyatli ulandi (${latency}ms)` };
         } else if (res.status === 401) {
-          return { success: false, latency, message: `⚠️ Supabase serveri ishlayapti (${latency}ms), ammo "Anon Public Key" kiritilmagan yoki noto'g'ri!` };
+          return { success: false, latency, message: `⚠️ Supabase serveri ishlayapti, ammo "Anon Public Key" noto'g'ri!` };
         }
         return { success: res.ok, latency, message: res.ok ? `✅ Supabase bazasiga ulandi (${latency}ms)` : `Xatolik: ${res.statusText}` };
       }
