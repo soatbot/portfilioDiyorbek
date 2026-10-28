@@ -37,6 +37,10 @@ function syncDynamicData() {
 
   document.querySelectorAll("a[href*='t.me']").forEach(a => {
     a.href = profile.telegram;
+    if (a.textContent.trim().startsWith("@")) {
+      const handle = profile.telegram.split("/").pop();
+      a.textContent = `@${handle}`;
+    }
   });
 
   document.querySelectorAll("a[href*='github.com']").forEach(a => {

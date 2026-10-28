@@ -14,8 +14,8 @@ const PORTFOLIO_CONFIG = {
     year: "2025",
     location: "Tashkent, Uzbekistan",
     email: "akbaraliyev.dev@gmail.com",
-    telegram: "https://t.me/akbaraliyev_dev",
-    github: "https://github.com/akbaraliyev",
+    telegram: "https://t.me/FromGuliston",
+    github: "https://github.com/akbaraliyev875",
     linkedin: "https://linkedin.com/in/akbaraliyev",
     instagram: "https://instagram.com/akbaraliyev",
     bioLead: "Zamonaviy veb-texnologiyalar va noan'anaviy dizayn uyg'unligida yuqori sifatli raqamli mahsulotlar yaratuvchi dasturchi.",
@@ -84,7 +84,7 @@ const PORTFOLIO_CONFIG = {
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
       accent: "var(--accent1)",
       tags: ["React", "Node.js", "Chart.js", "PostgreSQL"],
-      link: "https://github.com/akbaraliyev",
+      link: "https://github.com/akbaraliyev875",
       demoLink: "#"
     },
     {
@@ -97,7 +97,7 @@ const PORTFOLIO_CONFIG = {
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
       accent: "var(--accent2)",
       tags: ["Next.js", "Stripe / Payme", "Tailwind", "Supabase"],
-      link: "https://github.com/akbaraliyev",
+      link: "https://github.com/akbaraliyev875",
       demoLink: "#"
     },
     {
@@ -110,7 +110,7 @@ const PORTFOLIO_CONFIG = {
       image: "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=1200&q=80",
       accent: "var(--accent3)",
       tags: ["GSAP", "Three.js", "Vanilla JS", "CSS3"],
-      link: "https://github.com/akbaraliyev",
+      link: "https://github.com/akbaraliyev875",
       demoLink: "#"
     },
     {
@@ -123,7 +123,7 @@ const PORTFOLIO_CONFIG = {
       image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80",
       accent: "var(--accent4)",
       tags: ["Vue 3", "Express", "Socket.io", "MongoDB"],
-      link: "https://github.com/akbaraliyev",
+      link: "https://github.com/akbaraliyev875",
       demoLink: "#"
     },
     {
@@ -136,7 +136,7 @@ const PORTFOLIO_CONFIG = {
       image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80",
       accent: "var(--accent1)",
       tags: ["React Native", "Python FastAPI", "Docker"],
-      link: "https://github.com/akbaraliyev",
+      link: "https://github.com/akbaraliyev875",
       demoLink: "#"
     }
   ],

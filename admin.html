@@ -425,6 +425,88 @@
           </div>
         </form>
       </div>
+
+      <!-- SECTION 2: ADMIN PASSWORD & SECURITY -->
+      <div class="admin-card" style="margin-top: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 0.8rem;">
+          <div>
+            <h2 style="font-size: 1.8rem;">🔐 Admin Paroli va Xavfsizlik</h2>
+            <p class="jm-mono" style="opacity: 0.7; font-size: 0.85rem;">Boshqaruv paneliga kirish parolini xavfsiz yangilang (.env: admin123)</p>
+          </div>
+          <span id="pass-status-badge" class="badge-count" style="border-radius: 2rem; padding: 0.4rem 1rem; font-size: 0.85rem; background: var(--bg2); color: var(--fg); border: 1px solid var(--fg);">
+            Standart: .env (admin123)
+          </span>
+        </div>
+
+        <form id="change-password-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Joriy Parol (Hozirgi):</label>
+              <input type="password" id="cur-pass-input" class="form-control" placeholder="Hozirgi parolingiz..." required />
+            </div>
+            <div class="form-group">
+              <label>Yangi Parol:</label>
+              <input type="password" id="new-pass-input" class="form-control" placeholder="Kamida 4 ta belgi..." required />
+            </div>
+            <div class="form-group">
+              <label>Yangi Parolni Tasdiqlang:</label>
+              <input type="password" id="confirm-pass-input" class="form-control" placeholder="Yangi parolni qaytadan yozing..." required />
+            </div>
+          </div>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;">
+            <button type="submit" class="btn-action" style="background: var(--accent1); color: var(--fg);">Parolni Yangilash 🔐</button>
+            <button type="button" onclick="handleResetPassword()" class="btn-action" style="background: var(--bg); color: var(--fg);">Standartga Qaytarish (.env: admin123) ↺</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- SECTION 3: FREE CLOUD DATABASE (FIREBASE / SUPABASE) -->
+      <div class="admin-card" style="margin-top: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 0.8rem;">
+          <div>
+            <h2 style="font-size: 1.8rem;">☁️ Bulutli Ma'lumotlar Bazasi (Cloud Database)</h2>
+            <p class="jm-mono" style="opacity: 0.7; font-size: 0.85rem;">Loyihalar, xabarlar va profil sozlamalarini 100% bepul bulutda saqlash</p>
+          </div>
+          <span id="cloud-status-badge" class="badge-count" style="border-radius: 2rem; padding: 0.4rem 1rem; font-size: 0.85rem; background: var(--bg2); color: var(--fg); border: 1px solid var(--fg);">
+            🟡 Lokal Rejimda
+          </span>
+        </div>
+
+        <div style="background: var(--bg2); border: 1px solid var(--fg); border-radius: 0.8rem; padding: 1.2rem; margin-bottom: 1.5rem;">
+          <p class="jm-mono" style="font-size: 0.85rem; line-height: 1.6;">
+            ⚡ <strong>Supabase (PostgreSQL) loyihangiz ulangan:</strong><br/>
+            1. Loyiha URL manzili: <code>https://jvjvgycetybxdwglvgbo.supabase.co</code> (Avtomatik sozlangan)<br/>
+            2. <a href="https://supabase.com/dashboard/project/jvjvgycetybxdwglvgbo/settings/api" target="_blank" style="text-decoration: underline; font-weight: bold;">Supabase API Sozlamalari</a> sahifasiga kiring.<br/>
+            3. <strong>"Project API keys"</strong> qismidan <strong>"anon public"</strong> kalitini nusxalab, quyiga qo'ying va "Bazani Saqlash" tugmasini bosing!
+          </p>
+        </div>
+
+        <form id="cloud-db-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Baza Turi:</label>
+              <select id="cloud-db-type" class="form-control" onchange="handleDbTypeChange()">
+                <option value="supabase" selected>Supabase (PostgreSQL - Sizning bazangiz)</option>
+                <option value="firebase">Firebase Realtime Database</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Baza URL Manzili:</label>
+              <input type="text" id="cloud-db-url" class="form-control" value="https://jvjvgycetybxdwglvgbo.supabase.co" placeholder="https://..." required />
+            </div>
+            <div class="form-group" id="cloud-db-key-group" style="grid-column: 1 / -1;">
+              <label>Supabase Anon Public Key (JWT Token):</label>
+              <input type="password" id="cloud-db-key" class="form-control" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." />
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.5rem;">
+            <button type="button" onclick="testCloudDbConnection()" class="btn-action" style="background: var(--accent2); color: var(--fg);">🔌 Ulanishni Tekshirish</button>
+            <button type="submit" class="btn-action" style="background: var(--accent1); color: var(--fg);">💾 Bazani Saqlash</button>
+            <button type="button" onclick="pushAllDataToCloud()" class="btn-action" style="background: var(--bg); color: var(--fg);">⬆ Bulutga Sinxronlash (Upload)</button>
+            <button type="button" onclick="pullAllDataFromCloud()" class="btn-action" style="background: var(--bg); color: var(--fg);">⬇ Bulutdan Yuklash (Download)</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 
@@ -499,17 +581,18 @@
   <!-- TOAST NOTIFICATION -->
   <div class="jm-toast" id="jm-toast"></div>
 
-  <!-- Data Store Engine -->
+  <!-- Data Store Engine & ENV -->
+  <script src="./js/env.js"></script>
   <script src="./js/data-store.js"></script>
   <script>
-    // Security PIN Login
+    // Security PIN Login (Reads from .env / DataStore)
     const AUTH_KEY = "akbaraliyev_admin_auth";
-    const DEFAULT_PASS = "admin123";
 
     document.getElementById("admin-login-form").addEventListener("submit", (e) => {
       e.preventDefault();
-      const entered = document.getElementById("admin-password").value;
-      if (entered === DEFAULT_PASS) {
+      const entered = document.getElementById("admin-password").value.trim();
+      const activePass = DataStore.getAdminPassword();
+      if (entered === activePass) {
         sessionStorage.setItem(AUTH_KEY, "true");
         unlockAdmin();
         showToast("✅ Muvaffaqiyatli kirdingiz!");
@@ -557,6 +640,8 @@
       renderAdminProjects();
       loadProfileForm();
       initImageInputHandlers();
+      updateSecurityUI();
+      updateCloudDbUI();
     }
 
     // Image Input & File Upload Preview Handler
@@ -730,7 +815,7 @@
 
       const projectData = {
         title, category, year, image, tags,
-        link: link || "https://github.com/akbaraliyev",
+        link: link || "https://github.com/akbaraliyev875",
         demoLink: "project.html",
         description: desc
       };
@@ -760,12 +845,14 @@
       document.getElementById("prof-lastname").value = p.lastName || "Diyorbek";
       document.getElementById("prof-role").value = p.role || "";
       document.getElementById("prof-email").value = p.email || "diyorbekakbaraliyev6@gmail.com";
-      document.getElementById("prof-telegram").value = p.telegram || "https://t.me/akbaraliyev_dev";
-      document.getElementById("prof-github").value = p.github || "https://github.com/akbaraliyev";
+      document.getElementById("prof-telegram").value = p.telegram || "https://t.me/FromGuliston";
+      document.getElementById("prof-github").value = p.github || "https://github.com/akbaraliyev875";
       document.getElementById("prof-status").value = p.statusBadge || "Open for Work";
       document.getElementById("prof-location").value = p.location || "Toshkent, O'zbekiston";
       document.getElementById("prof-biolead").value = p.bioLead || "";
       document.getElementById("prof-biodetail").value = p.bioDetail || "";
+      updateSecurityUI();
+      updateCloudDbUI();
     }
 
     document.getElementById("profile-edit-form").addEventListener("submit", (e) => {
@@ -787,6 +874,148 @@
       showToast("💾 Profil ma'lumotlari muvaffaqiyatli saqlandi!");
     });
 
+    // 4. PASSWORD MANAGEMENT HANDLERS
+    document.getElementById("change-password-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const cur = document.getElementById("cur-pass-input").value.trim();
+      const newP = document.getElementById("new-pass-input").value.trim();
+      const confP = document.getElementById("confirm-pass-input").value.trim();
+
+      const activePass = DataStore.getAdminPassword();
+      if (cur !== activePass) {
+        showToast("❌ Joriy parol noto'g'ri!");
+        return;
+      }
+      if (newP !== confP) {
+        showToast("❌ Yangi parollar bir-biriga mos kelmadi!");
+        return;
+      }
+      const res = DataStore.updateAdminPassword(newP);
+      if (res.success) {
+        showToast("✅ " + res.message);
+        document.getElementById("change-password-form").reset();
+        updateSecurityUI();
+      } else {
+        showToast("❌ " + res.message);
+      }
+    });
+
+    function handleResetPassword() {
+      if (confirm("Parolni .env dagi standart holatiga (admin123) qaytarmoqchimisiz?")) {
+        DataStore.resetAdminPassword();
+        showToast("↺ Parol standart (.env: admin123) holatiga qaytarildi.");
+        updateSecurityUI();
+      }
+    }
+
+    function updateSecurityUI() {
+      const badge = document.getElementById("pass-status-badge");
+      if (badge) {
+        if (DataStore.isPasswordCustomized()) {
+          badge.textContent = "🟢 Maxsus parol o'rnatilgan";
+          badge.style.background = "var(--accent1)";
+          badge.style.color = "var(--fg)";
+        } else {
+          badge.textContent = "ℹ️ Standart: .env (admin123)";
+          badge.style.background = "var(--bg2)";
+          badge.style.color = "var(--fg)";
+        }
+      }
+    }
+
+    // 5. CLOUD DATABASE HANDLERS
+    function handleDbTypeChange() {
+      const type = document.getElementById("cloud-db-type").value;
+      const keyGroup = document.getElementById("cloud-db-key-group");
+      const urlInput = document.getElementById("cloud-db-url");
+      if (type === "supabase") {
+        keyGroup.style.display = "block";
+        if (!urlInput.value || urlInput.value.includes("firebase")) {
+          urlInput.value = "https://jvjvgycetybxdwglvgbo.supabase.co";
+        }
+      } else {
+        keyGroup.style.display = "none";
+        if (urlInput.value.includes("supabase")) {
+          urlInput.value = "";
+        }
+      }
+    }
+
+    function updateCloudDbUI() {
+      const badge = document.getElementById("cloud-status-badge");
+      const typeSelect = document.getElementById("cloud-db-type");
+      const urlInput = document.getElementById("cloud-db-url");
+      const keyInput = document.getElementById("cloud-db-key");
+      const cfg = DataStore.getCloudDbConfig();
+
+      if (typeSelect && cfg.type) typeSelect.value = cfg.type;
+      if (urlInput && cfg.url) urlInput.value = cfg.url;
+      if (keyInput && cfg.apiKey) keyInput.value = cfg.apiKey;
+      handleDbTypeChange();
+
+      if (badge) {
+        if (DataStore.isCloudConfigured()) {
+          const typeName = (cfg.type === "supabase" || (cfg.url && cfg.url.includes("supabase.co"))) ? "Supabase" : "Firebase";
+          badge.textContent = `🟢 ${typeName} Ulangan`;
+          badge.style.background = "var(--accent2)";
+          badge.style.color = "var(--fg)";
+        } else {
+          badge.textContent = "🟡 Lokal Rejimda";
+          badge.style.background = "var(--bg2)";
+          badge.style.color = "var(--fg)";
+        }
+      }
+    }
+
+    async function testCloudDbConnection() {
+      const type = document.getElementById("cloud-db-type").value;
+      const url = document.getElementById("cloud-db-url").value.trim();
+      const apiKey = document.getElementById("cloud-db-key") ? document.getElementById("cloud-db-key").value.trim() : "";
+      if (!url) {
+        showToast("⚠️ Iltimos, baza URL manzilini kiriting!");
+        return;
+      }
+      showToast("⏳ Ulanish tekshirilmoqda...");
+      const res = await DataStore.testCloudConnection({ type, url, apiKey });
+      showToast(res.message);
+      if (res.success) updateCloudDbUI();
+    }
+
+    document.getElementById("cloud-db-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const type = document.getElementById("cloud-db-type").value;
+      const url = document.getElementById("cloud-db-url").value.trim();
+      const apiKey = document.getElementById("cloud-db-key") ? document.getElementById("cloud-db-key").value.trim() : "";
+      DataStore.saveCloudDbConfig(type, url, apiKey);
+      showToast("💾 Baza sozlamalari saqlandi!");
+      updateCloudDbUI();
+    });
+
+    async function pushAllDataToCloud() {
+      if (!DataStore.isCloudConfigured()) {
+        showToast("⚠️ Avval baza URL manzilini saqlang!");
+        return;
+      }
+      showToast("⏳ Ma'lumotlar bulutga yuklanmoqda...");
+      const res = await DataStore.pushAllToCloud();
+      showToast(res.message);
+    }
+
+    async function pullAllDataFromCloud() {
+      if (!DataStore.isCloudConfigured()) {
+        showToast("⚠️ Avval baza URL manzilini saqlang!");
+        return;
+      }
+      showToast("⏳ Bulutdan ma'lumotlar olinmoqda...");
+      const data = await DataStore.fetchFromCloud();
+      if (data) {
+        initAdminDashboard();
+        showToast("✅ Barcha ma'lumotlar bulutdan yangilandi!");
+      } else {
+        showToast("❌ Ma'lumotlarni yuklab bo'lmadi yoki baza bo'sh.");
+      }
+    }
+
     function resetToDemoData() {
       DataStore.resetToDefaults();
       initAdminDashboard();
@@ -798,7 +1027,7 @@
       const toast = document.getElementById("jm-toast");
       toast.textContent = msg;
       toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 2600);
+      setTimeout(() => toast.classList.remove("show"), 2800);
     }
 
     function escapeHtml(str) {

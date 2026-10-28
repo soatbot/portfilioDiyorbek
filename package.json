@@ -1,0 +1,21 @@
+{
+  "name": "akbaraliyev-portfolio",
+  "version": "2.0.0",
+  "description": "Akbaraliyev Diyorbek — Interactive Portfolio & Admin Panel with Cloud Database",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "portfolio",
+    "developer",
+    "firebase",
+    "admin-panel"
+  ],
+  "author": "Akbaraliyev Diyorbek",
+  "license": "MIT",
+  "dependencies": {
+    "pg": "^8.23.1"
+  }
+}
